@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
-const db = require('./db');
+const db = require('./config/db');
+const productosRoutes = require('./routes/productosRoutes')
 
 app.get('/', (req, res) => {
     res.send(`
@@ -16,40 +17,16 @@ app.get('/', (req, res) => {
     `);
 })
 
-//Ruta para ver Todos los productos
-app.get('/productos', (req, res) => {
-    res.send('Obteniendo todos los productos');
-})
+app.use('/productos', productosRoutes);
 
-//Ruta para Obtener un producto
-app.get('/productos/:id', (req, res) => {
-    const id = req.params.id;
-    res.send('Obteniendo un producto con el id: ' + id);
-})
-
-//Ruta para Editar un producto - Vista prellenado
-app.get('/productos/editar/:id', (req, res) => {
-    const id = req.params.id;
-    res.send('Enviando datos a la vista para hacer prellenado');
-})
-
-//Ruta para Editar un producto - Update
-app.put('/productos/:id', (req, res) => {
-    const id = req.params.id;
-    res.send('Editando el producto con el id: ' + id);
-})
-
-//Ruta para Borrar un producto
-app.delete('/productos/:id', (req, res) => {
-    const id = req.params.id;
-    res.send('Borrando el producto con el id: ' + id);
-})
-
-//Ruta para Agregar un producto
-app.post('/productos/', (req, res) => {
-    res.send('Agregando producto a la DB');
-})
-
+app.use( (req, res, next) => {
+    respuesta = {
+        error: true,
+        codigo: 404,
+        mensaje: 'URL no encontrada'
+    }
+    res.status(404).send(respuesta);
+});
 
 app.listen(3000, () => {
     console.log(`
