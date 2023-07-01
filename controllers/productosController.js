@@ -1,5 +1,12 @@
-const obtenerProductos =  (req, res) => {
-    res.send('Obteniendo todos los productos');
+const productosServices = require('../services/productosServices')
+
+const obtenerProductos =  async(req, res) => {
+    try {
+        const productos = await productosServices.obtenerProductos();
+        res.json(productos);
+    } catch (err) {
+        throw err;
+    }
 }
 
 const obtenerUnProducto = (req, res) => {
