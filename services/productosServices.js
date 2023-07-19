@@ -1,7 +1,7 @@
 const productosModels = require('../models/productosModels');
 
-const obtenerProductos =  async() => {
-    const productos = await productosModels.obtenerProductos();
+const obtenerProductos =  async(filters) => {
+    const productos = await productosModels.obtenerProductos(filters);
     return productos;
 }
 
@@ -24,4 +24,6 @@ const borrarProducto = () => {
 const agregarProducto = () => {
 }
 
-module.exports = productosServices;
+module.exports = {
+    obtenerProductos
+};

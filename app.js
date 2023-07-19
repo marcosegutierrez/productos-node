@@ -1,6 +1,5 @@
 const express = require('express');
 const app = express();
-const db = require('./config/db');
 const productosRoutes = require('./routes/productosRoutes')
 
 app.get('/', (req, res) => {
@@ -19,6 +18,7 @@ app.get('/', (req, res) => {
 
 app.use('/productos', productosRoutes);
 
+// 404
 app.use( (req, res, next) => {
     respuesta = {
         error: true,

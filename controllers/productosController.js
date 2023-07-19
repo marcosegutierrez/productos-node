@@ -1,8 +1,16 @@
 const productosServices = require('../services/productosServices')
 
 const obtenerProductos =  async(req, res) => {
+    const filters = {
+        name: req.query.name || '',
+        minPrice: parseFloat(req.query.minPrice) || null,
+        maxPrice: parseFloat(req.query.maxPrice) || null,
+        order: req.query.order || '',
+        limit: parseInt(req.query.limit) || 15
+    }
+
     try {
-        const productos = await productosServices.obtenerProductos();
+        const productos = await productosServices.obtenerProductos(filters);
         res.json(productos);
     } catch (err) {
         throw err;
