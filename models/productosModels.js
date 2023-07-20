@@ -42,6 +42,18 @@ const obtenerProductos = async(filters) => {
     }
 };
 
+const obtenerUnProducto = async(id) => {
+    let sql = `SELECT * FROM productos WHERE id = ${id}`;
+    
+    try {
+        const [producto] = await db.query(sql);
+        return producto;
+    } catch (err) {
+        throw new Error(`Error al obtener producto con el id ${id} de la base de datos`);
+    }
+}
+
 module.exports = {
-    obtenerProductos
+    obtenerProductos,
+    obtenerUnProducto
 };

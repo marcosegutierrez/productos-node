@@ -17,9 +17,14 @@ const obtenerProductos =  async(req, res) => {
     }
 }
 
-const obtenerUnProducto = (req, res) => {
+const obtenerUnProducto = async(req, res) => {
     const id = req.params.id;
-    res.send('Obteniendo un producto con el id: ' + id);
+    try {
+        const producto = await productosServices.obtenerUnProducto(id);
+        res.json(producto);
+    } catch (err) {
+        throw err;
+    }
 }
 
 const editarProducto = (req, res) => {

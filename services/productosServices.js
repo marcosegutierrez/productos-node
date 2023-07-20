@@ -5,8 +5,9 @@ const obtenerProductos =  async(filters) => {
     return productos;
 }
 
-const obtenerUnProducto = () => {
-    // const id = req.params.id;
+const obtenerUnProducto = async(id) => {
+    const producto = await productosModels.obtenerUnProducto(id);
+    return producto;
 }
 
 const editarProducto = () => {
@@ -25,5 +26,6 @@ const agregarProducto = () => {
 }
 
 module.exports = {
-    obtenerProductos
+    obtenerProductos,
+    obtenerUnProducto
 };
