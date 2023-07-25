@@ -37,9 +37,14 @@ const actualizarProducto = (req, res) => {
     res.send('Editando el producto con el id: ' + id);
 }
 
-const borrarProducto = (req, res) => {
+const borrarProducto = async(req, res) => {
     const id = req.params.id;
-    res.send('Borrando el producto con el id: ' + id);
+    try {
+        const producto = await productosServices.borrarProducto(id);
+        res.json(`Producto con el id ${id} borrado correctamente`);
+    } catch (err) {
+        throw err;
+    }
 }
 
 const agregarProducto = (req, res) => {

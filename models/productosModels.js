@@ -53,7 +53,18 @@ const obtenerUnProducto = async(id) => {
     }
 }
 
+const borrarProducto = async(id) => {
+    let sql = `DELETE FROM productos WHERE id = ${id}`;
+
+    try {
+        await db.query(sql);
+    } catch (err) {
+        throw new Error(`Error al eliminar producto con el id ${id} de la base de datos`);
+    }
+}
+
 module.exports = {
     obtenerProductos,
-    obtenerUnProducto
+    obtenerUnProducto,
+    borrarProducto
 };

@@ -18,8 +18,8 @@ const actualizarProducto = () => {
     // const id = req.params.id;
 }
 
-const borrarProducto = () => {
-    // const id = req.params.id;
+const borrarProducto = async(id) => {
+    const producto = await productosModels.borrarProducto(id);
 }
 
 const agregarProducto = () => {
@@ -27,5 +27,6 @@ const agregarProducto = () => {
 
 module.exports = {
     obtenerProductos,
-    obtenerUnProducto
+    obtenerUnProducto,
+    borrarProducto
 };
