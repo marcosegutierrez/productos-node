@@ -1,6 +1,6 @@
 const productosServices = require('../services/productosServices')
 
-const obtenerProductos =  async(req, res) => {
+const obtenerProductos = async (req, res) => {
     const filters = {
         name: req.query.name || '',
         minPrice: parseFloat(req.query.minPrice) || null,
@@ -17,7 +17,7 @@ const obtenerProductos =  async(req, res) => {
     }
 }
 
-const obtenerUnProducto = async(req, res) => {
+const obtenerUnProducto = async (req, res) => {
     const id = req.params.id;
     try {
         const producto = await productosServices.obtenerUnProducto(id);
@@ -37,7 +37,7 @@ const actualizarProducto = (req, res) => {
     res.send('Editando el producto con el id: ' + id);
 }
 
-const borrarProducto = async(req, res) => {
+const borrarProducto = async (req, res) => {
     const id = req.params.id;
     try {
         const producto = await productosServices.borrarProducto(id);
@@ -47,8 +47,21 @@ const borrarProducto = async(req, res) => {
     }
 }
 
-const agregarProducto = (req, res) => {
-    res.send('Agregando producto a la DB');
+const agregarProducto = async (req, res) => {
+    const newProducto = {
+        nombre: req.body.nombre,
+        precio: req.body.precio,
+        stock: req.body.stock,
+        descripcion: req.body.descripcion,
+        imagen: req.body.imagen
+    }
+
+    try {
+        const producto = await productosServices.agregarProducto(newProducto);
+        res.json(`Producto ingresado correctamente`);
+    } catch (error) {
+        return res.status(500).json({ message: "Algo salió mal" });
+    }
 }
 
 module.exports = {

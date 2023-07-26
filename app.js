@@ -16,6 +16,7 @@ app.get('/', (req, res) => {
     `);
 })
 
+app.use(express.json());
 app.use('/productos', productosRoutes);
 
 // 404

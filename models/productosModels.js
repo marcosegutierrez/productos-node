@@ -63,8 +63,32 @@ const borrarProducto = async(id) => {
     }
 }
 
+const agregarProducto = async(newProducto) => {
+    let values = [
+        newProducto.nombre,
+        newProducto.precio,
+        newProducto.stock,
+        newProducto.descripcion,
+        newProducto.imagen
+    ]
+    let sql = `INSERT INTO productos (
+                nombre,
+                precio,
+                stock,
+                descripcion,
+                imagen
+                ) VALUES (?, ?, ?, ?, ?)`;
+    try {
+        const [rows] = await db.query(sql, values);
+        return rows;
+    } catch (err) {
+        throw new Error('Error al ingresar nuevo producto a la base de datos');
+    }
+}
+
 module.exports = {
     obtenerProductos,
     obtenerUnProducto,
-    borrarProducto
+    borrarProducto,
+    agregarProducto
 };
