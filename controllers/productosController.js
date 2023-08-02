@@ -27,14 +27,26 @@ const obtenerUnProducto = async (req, res) => {
     }
 }
 
-const editarProducto = (req, res) => {
+const editarProducto = async (req, res) => {
     const id = req.params.id;
     res.send('Enviando datos a la vista para hacer prellenado');
 }
 
-const actualizarProducto = (req, res) => {
+const actualizarProducto = async (req, res) => {
     const id = req.params.id;
-    res.send('Editando el producto con el id: ' + id);
+    const updateProducto = {
+        nombre: req.body.nombre,
+        precio: req.body.precio,
+        stock: req.body.stock,
+        descripcion: req.body.descripcion,
+        imagen: req.body.imagen,
+    }
+    try {
+        const producto = await productosServices.actualizarProducto(id, updateProducto);
+        res.json(`Producto con el id ${id} actualizado correctamente`);
+    } catch (err) {
+        throw err
+    }
 }
 
 const borrarProducto = async (req, res) => {

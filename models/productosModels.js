@@ -86,9 +86,36 @@ const agregarProducto = async(newProducto) => {
     }
 }
 
+const actualizarProducto = async(id, updateProducto) => {
+    let values = [
+        updateProducto.nombre,
+        updateProducto.precio,
+        updateProducto.stock,
+        updateProducto.descripcion,
+        updateProducto.imagen,
+        id
+    ]
+    // if por si no se manda 'x' dato
+    let sql = `UPDATE productos 
+                SET 
+                    nombre = ?,
+                    precio = ?,
+                    stock = ?,
+                    descripcion = ?,
+                    imagen = ?
+                WHERE id = ?`;
+    try {
+        const [rows] = await db.query(sql, values);
+        return rows;
+    } catch (err) {
+        throw new Error(`Error al modificar producto con el id ${id} desde la base de datos`);
+    }
+}
+
 module.exports = {
     obtenerProductos,
     obtenerUnProducto,
     borrarProducto,
-    agregarProducto
+    agregarProducto,
+    actualizarProducto
 };
