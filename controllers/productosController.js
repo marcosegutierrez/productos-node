@@ -35,11 +35,11 @@ const editarProducto = async (req, res) => {
 const actualizarProducto = async (req, res) => {
     const id = req.params.id;
     const updateProducto = {
-        nombre: req.body.nombre,
-        precio: req.body.precio,
-        stock: req.body.stock,
-        descripcion: req.body.descripcion,
-        imagen: req.body.imagen,
+        nombre: req.body.nombre || '',
+        precio: req.body.precio || '',
+        stock: req.body.stock || '',
+        descripcion: req.body.descripcion || '',
+        imagen: req.body.imagen || '',
     }
     try {
         const producto = await productosServices.actualizarProducto(id, updateProducto);

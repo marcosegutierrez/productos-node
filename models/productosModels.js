@@ -87,23 +87,35 @@ const agregarProducto = async(newProducto) => {
 }
 
 const actualizarProducto = async(id, updateProducto) => {
-    let values = [
-        updateProducto.nombre,
-        updateProducto.precio,
-        updateProducto.stock,
-        updateProducto.descripcion,
-        updateProducto.imagen,
-        id
-    ]
-    // if por si no se manda 'x' dato
-    let sql = `UPDATE productos 
-                SET 
-                    nombre = ?,
-                    precio = ?,
-                    stock = ?,
-                    descripcion = ?,
-                    imagen = ?
-                WHERE id = ?`;
+    let sql = 'UPDATE productos SET ';
+    let setClause = "";
+    let values = [];
+
+    if (updateProducto.nombre) {
+        setClause += 'nombre = ?, ';
+        values.push(updateProducto.nombre);
+    }
+    if (updateProducto.precio) {
+        setClause += 'precio = ?, ';
+        values.push(updateProducto.precio);
+    }
+    if (updateProducto.stock) {
+        setClause += 'stock = ?, ';
+        values.push(updateProducto.stock);
+    }
+    if (updateProducto.descripcion) {
+        setClause += 'descripcion = ?, ';
+        values.push(updateProducto.descripcion);
+    }
+    if (updateProducto.imagen) {
+        setClause += 'imagen = ?, ';
+        values.push(updateProducto.imagen);
+    }
+    if (setClause !== "") {
+        setClause = setClause.slice(0, -2) + ` WHERE id = ${id}`;
+        sql += setClause;
+    }
+
     try {
         const [rows] = await db.query(sql, values);
         return rows;
