@@ -29,7 +29,12 @@ const obtenerUnProducto = async (req, res) => {
 
 const editarProducto = async (req, res) => {
     const id = req.params.id;
-    res.send('Enviando datos a la vista para hacer prellenado');
+    try {
+        const producto = await productosServices.editarProducto(id);
+        res.json(producto);
+    } catch (err) {
+        throw err;
+    }
 }
 
 const actualizarProducto = async (req, res) => {

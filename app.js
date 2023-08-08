@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
 const productosRoutes = require('./routes/productosRoutes')
+require('dotenv').config();
+
+const PORT = process.env.PORT
 
 app.get('/', (req, res) => {
     res.send(`
@@ -29,8 +32,8 @@ app.use( (req, res, next) => {
     res.status(404).send(respuesta);
 });
 
-app.listen(3000, () => {
+app.listen(PORT, () => {
     console.log(`
-        Server online corriendo en puerto 3000
+        Server online corriendo en puerto ${PORT}
         http://localhost:3000
     `)});

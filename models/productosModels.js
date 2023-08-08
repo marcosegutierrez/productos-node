@@ -53,6 +53,16 @@ const obtenerUnProducto = async(id) => {
     }
 }
 
+const editarProducto = async (id) => {
+    let sql = `SELECT * FROM productos WHERE id = ${id}`;
+    try {
+        const [producto] = await db.query(sql);
+        return producto;
+    } catch (err) {
+        throw new Error(`Error al obtener la vista de edición del producto con el id ${id}`);
+    }
+}
+
 const borrarProducto = async(id) => {
     let sql = `DELETE FROM productos WHERE id = ${id}`;
 
@@ -129,5 +139,6 @@ module.exports = {
     obtenerUnProducto,
     borrarProducto,
     agregarProducto,
-    actualizarProducto
+    actualizarProducto,
+    editarProducto
 };

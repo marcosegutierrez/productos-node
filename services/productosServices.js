@@ -10,8 +10,9 @@ const obtenerUnProducto = async(id) => {
     return producto;
 }
 
-const editarProducto = () => {
-    // const id = req.params.id;
+const editarProducto = async (id) => {
+    const producto = await productosModels.editarProducto(id);
+    return producto;
 }
 
 const actualizarProducto = async (id, updateProducto) => {
@@ -33,5 +34,6 @@ module.exports = {
     obtenerUnProducto,
     borrarProducto,
     agregarProducto,
-    actualizarProducto
+    actualizarProducto,
+    editarProducto
 };
