@@ -1,9 +1,17 @@
 const express = require('express');
+const path = require('path');
 const app = express();
-const productosRoutes = require('./routes/productosRoutes')
+const productosRoutes = require('./src/routes/productosRoutes')
 require('dotenv').config();
 
 const PORT = process.env.PORT
+
+app.set("view engine", "ejs");
+app.set('views', [
+    path.join('./src/views')
+])
+
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     res.send(`

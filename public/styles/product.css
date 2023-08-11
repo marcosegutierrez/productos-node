@@ -1,0 +1,8 @@
+body {
+    position: relative;
+}
+
+main {
+    position: absolute;
+    left: 35%;
+}

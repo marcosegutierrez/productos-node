@@ -21,7 +21,8 @@ const obtenerUnProducto = async (req, res) => {
     const id = req.params.id;
     try {
         const producto = await productosServices.obtenerUnProducto(id);
-        res.json(producto);
+        res.render('product', {producto: producto})
+        //res.json(producto);
     } catch (err) {
         throw err;
     }

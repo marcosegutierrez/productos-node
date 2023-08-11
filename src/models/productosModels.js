@@ -44,7 +44,6 @@ const obtenerProductos = async(filters) => {
 
 const obtenerUnProducto = async(id) => {
     let sql = `SELECT * FROM productos WHERE id = ${id}`;
-    
     try {
         const [producto] = await db.query(sql);
         return producto;
