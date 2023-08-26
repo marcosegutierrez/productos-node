@@ -22,9 +22,8 @@ const obtenerUnProducto = async (req, res) => {
     try {
         const producto = await productosServices.obtenerUnProducto(id);
         res.render('product', {producto: producto})
-        //res.json(producto);
     } catch (err) {
-        throw err;
+        return res.status(500).json({ message: 'Algo salió mal'});
     }
 }
 
